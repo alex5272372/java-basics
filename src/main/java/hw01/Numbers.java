@@ -1,9 +1,15 @@
 package hw01;
 
+import java.util.Scanner;
+import java.util.Random;
+
 public class Numbers {
+    private final static int years = 10;
+    private final static int films = 10;
+
     public static void main(String[] args) {
         // https://www.filmsite.org/greatestfilms-byyear.html
-        String[][] events = new String[10][];
+        String[][] events = new String[years][];
         events[0] = new String[]{
                 "Almost Famous",
                 "American Psycho",
@@ -15,7 +21,7 @@ public class Numbers {
                 "Chicken Run",
                 "Crouching Tiger, Hidden Dragon",
                 "Dancer in the Dark"
-    };
+        };
         events[1] = new String[]{
                 "Amelie",
                 "A Beautiful Mind",
@@ -125,6 +131,88 @@ public class Numbers {
                 "Inglourious Basterds"
         };
 
-        System.out.println(events[4][8]);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your name:");
+        String name = sc.next();
+        System.out.println("Let the game begin!");
+
+        while(true) {
+            int i = generateRandomInt();
+            System.out.println("--------------------------------------------------------------------------------------");
+            System.out.println("What year is the movie premiere?");
+            System.out.println(events[i / films][i % films]);
+            System.out.println("Enter a number from 0 (corresponds to 2000) to 9 (corresponds to 2009), or -1 for exit");
+
+            boolean[] approach = new boolean[years];
+            while (true) {
+                String val = sc.next();
+                int num = processNextInt(val);
+
+                if (num == -2 || !isValidInput(num)) {
+                    continue;
+                } else if(num == -1) {
+                    return;
+                }
+
+                if(approach[num]) {
+                    System.out.println("This number was entered earlier.");
+                    continue;
+                } else {
+                    approach[num] = true;
+                }
+
+                int res = directionOfApproach(num, i / films, name);
+                if(res == 0) {
+                    printApproach(approach);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void printApproach(boolean[] approach) {
+        String res = "";
+        for(int i = years - 1; i >= 0; i--) {
+            if(approach[i]) {
+                res = res + " " + i;
+            }
+        }
+        System.out.println("Your numbers:" + res);
+    }
+
+    private static int generateRandomInt(){
+        Random random = new Random();
+        return random.nextInt(years * films);
+    }
+
+    private static int directionOfApproach(int val, int dest, String name) {
+        if(val < dest) {
+            System.out.println("Your number is too small. Please, try again.");
+            return -1;
+        } else if(val > dest) {
+            System.out.println("Your number is too big. Please, try again.");
+            return 1;
+        } else {
+            System.out.println(String.format("Congratulations, %s!", name));
+            return 0;
+        }
+    }
+
+    private static boolean isValidInput(int val) {
+        if(val >= -1 && val <= 9) {
+            return true;
+        } else {
+            System.out.println("Wrong input. Value must be between -1 and 9.");
+            return false;
+        }
+    }
+
+    private static int processNextInt(String val) {
+        try {
+            return Integer.parseInt(val);
+        } catch (Exception e) {
+            System.out.println(String.format("Wrong input. %s.", e.getMessage()));
+            return -2;
+        }
     }
 }
