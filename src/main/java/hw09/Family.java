@@ -1,15 +1,14 @@
-package hw08;
+package hw09;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 public class Family {
     private Human mother;
     private Human father;
-    private ArrayList<Human> children;
-    private HashSet<Pet> pets;
+    private List<Human> children;
+    private Set<Pet> pets;
 
-    public Family(Human mother, Human father) {
+    Family(Human mother, Human father) {
         this.mother = mother;
         mother.setFamily(this);
         this.father = father;
@@ -26,13 +25,21 @@ public class Family {
         return father;
     }
 
-    public Pet getPet(String nickname) {
+    Set<Pet> getPets() {
+        return pets;
+    }
+
+    Pet getPet(String nickname) {
         for(Pet pet : pets) {
             if (pet.getNickname().equals(nickname)) {
                 return pet;
             }
         }
         return null;
+    }
+
+    Human getChild(int i) {
+        return children.get(i);
     }
 
     void addPet(Pet pet) {
@@ -64,6 +71,18 @@ public class Family {
             return true;
         } else {
             return  false;
+        }
+    }
+
+    public void deleteAllChildrenOlderThen(int age) {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int i = 0;
+        while(i < children.size()) {
+            if (year - children.get(i).getYear() > age) {
+                deleteChild(i);
+            } else {
+                i++;
+            }
         }
     }
 

@@ -1,7 +1,7 @@
-package hw08;
+package hw09;
 
 public final class Woman extends Human {
-    public Woman(String name, String surname, int year, int iq) {
+    Woman(String name, String surname, int year, int iq) {
         super(name, surname, year, iq);
     }
 

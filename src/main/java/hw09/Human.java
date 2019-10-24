@@ -1,8 +1,9 @@
-package hw08;
+package hw09;
 
-import java.util.Calendar;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Calendar;
 
 public class Human implements HumanCreator {
     private String name;
@@ -10,7 +11,7 @@ public class Human implements HumanCreator {
     private int year;
     private int iq;
     private Family family;
-    private HashMap<DayOfWeek, String> schedule;
+    private Map<DayOfWeek, String> schedule;
 
     Human(String name, String surname, int year, int iq) {
         this.name = name;
@@ -20,12 +21,20 @@ public class Human implements HumanCreator {
         this.schedule = new HashMap<DayOfWeek, String>();
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getSurname() {
+    String getSurname() {
         return surname;
+    }
+
+    int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     Family getFamily() {
@@ -40,23 +49,27 @@ public class Human implements HumanCreator {
         schedule.put(day, task);
     }
 
-    public Human bornChild() {
-        // https://www.babble.com/baby-names/
-        String[] manNames = {"Ayden", "Jayden", "Barack", "Sam", "Johnson", "Gennadi", "Genius", "Melvin", "Melville", "Zabi"};
-        String[] womanNames = {"Madelyn", "Makayla", "Khloe", "Zahava", "Nava", "Linnett", "Cheyenne", "Genevieve", "Poppy", "Olinda"};
-        int nameIndex = generateRandomInt(10);
+    public Human bornChild(String manName, String womanName) {
         Calendar now = Calendar.getInstance();
         int childIq = (family.getFather().iq + family.getMother().iq) / 2;
 
         Human child;
         if(generateRandomInt(2) == 0) {
-            child = new Man(manNames[nameIndex], surname, now.get(Calendar.YEAR), childIq);
+            child = new Man(manName, surname, now.get(Calendar.YEAR), childIq);
         } else {
-            child = new Woman(womanNames[nameIndex], surname, now.get(Calendar.YEAR), childIq);
+            child = new Woman(womanName, surname, now.get(Calendar.YEAR), childIq);
         }
 
         family.addChild(child);
         return child;
+    }
+
+    public Human bornChild() {
+        // https://www.babble.com/baby-names/
+        String[] manNames = {"Ayden", "Jayden", "Barack", "Sam", "Johnson", "Gennadi", "Genius", "Melvin", "Melville", "Zabi"};
+        String[] womanNames = {"Madelyn", "Makayla", "Khloe", "Zahava", "Nava", "Linnett", "Cheyenne", "Genevieve", "Poppy", "Olinda"};
+        int nameIndex = generateRandomInt(10);
+        return bornChild(manNames[nameIndex], womanNames[nameIndex]);
     }
 
     void greetPet(String nickname) {
