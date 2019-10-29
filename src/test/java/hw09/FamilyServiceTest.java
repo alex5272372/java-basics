@@ -40,20 +40,8 @@ public class FamilyServiceTest {
 
     @Test
     public void testGetAllFamilies() {
-        String expectedResult = "[Family{\n" +
-                "    mother=Woman{name='Kate1', surname='Karleone1', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John1', surname='Karleone1', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Man{name='Man11', surname='Karleone1', year=2019, iq=66, schedule={}}],\n" +
-                "    pets=[DOMESTIC_CAT{nickname='tom', age=3, trickLevel=60, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}, DOG{nickname='bobik1', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}]}, Family{\n" +
-                "    mother=Woman{name='Kate2', surname='Karleone2', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John2', surname='Karleone2', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Woman{name='Woman21', surname='Karleone2', year=2019, iq=66, schedule={}}, Man{name='Man22', surname='Karleone2', year=2019, iq=66, schedule={}}],\n" +
-                "    pets=[DOG{nickname='bobik', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}]}, Family{\n" +
-                "    mother=Woman{name='Kate3', surname='Karleone3', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John3', surname='Karleone3', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Man{name='Man31', surname='Karleone3', year=2019, iq=66, schedule={}}, Man{name='Man32', surname='Karleone3', year=2019, iq=66, schedule={}}, Man{name='Man33', surname='Karleone3', year=2019, iq=66, schedule={}}],\n" +
-                "    pets=[]}]";
-        String actualResult = familyService.getAllFamilies().toString();
+        int expectedResult = 3;
+        int actualResult = familyService.getAllFamilies().size();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
@@ -94,23 +82,15 @@ public class FamilyServiceTest {
 
     @Test
     public void testBornChild() {
-        String expectedResult = "Family{\n" +
-                "    mother=Woman{name='Kate1', surname='Karleone1', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John1', surname='Karleone1', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Man{name='Man11', surname='Karleone1', year=2019, iq=66, schedule={}}, Man{name='Bill', surname='Karleone1', year=2019, iq=66, schedule={}}],\n" +
-                "    pets=[DOMESTIC_CAT{nickname='tom', age=3, trickLevel=60, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}, DOG{nickname='bobik1', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}]}";
-        String actualResult = familyService.bornChild(familyService.getFamilyById(0), "Bill", "Bill").toString();
+        int expectedResult = 4;
+        int actualResult = familyService.bornChild(familyService.getFamilyById(0), "Bill", "Bill").countFamily();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testAdoptChild() {
-        String expectedResult = "Family{\n" +
-                "    mother=Woman{name='Kate1', surname='Karleone1', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John1', surname='Karleone1', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Woman{name='Woman11', surname='Karleone1', year=2019, iq=66, schedule={}}, {name='Bill', surname='Karleone1', year=2015, iq=80, schedule={}}],\n" +
-                "    pets=[DOMESTIC_CAT{nickname='tom', age=3, trickLevel=60, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}, DOG{nickname='bobik1', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}]}";
-        String actualResult = familyService.adoptChild(familyService.getFamilyById(0), new Human("Bill", "Karleone1", 2015, 80)).toString();
+        int expectedResult = 4;
+        int actualResult = familyService.adoptChild(familyService.getFamilyById(0), new Human("Bill", "Karleone1", 2015, 80)).countFamily();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
@@ -123,12 +103,8 @@ public class FamilyServiceTest {
 
     @Test
     public void testGetFamilyById() {
-        String expectedResult = "Family{\n" +
-                "    mother=Woman{name='Kate1', surname='Karleone1', year=1965, iq=65, schedule={}},\n" +
-                "    father=Man{name='John1', surname='Karleone1', year=1967, iq=67, schedule={}},\n" +
-                "    children=[Man{name='Man11', surname='Karleone1', year=2019, iq=66, schedule={}}],\n" +
-                "    pets=[DOMESTIC_CAT{nickname='tom', age=3, trickLevel=60, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}, DOG{nickname='bobik1', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}]}";
-        String actualResult = familyService.getFamilyById(0).toString();
+        String expectedResult = "Woman{name='Kate1', surname='Karleone1', year=1965, iq=65, schedule={}}";
+        String actualResult = familyService.getFamilyById(0).getMother().toString();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
