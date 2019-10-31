@@ -1,6 +1,7 @@
 package hw10;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -12,12 +13,12 @@ public class Human implements HumanCreator {
     private Family family;
     private Map<DayOfWeek, String> schedule;
 
-    Human(String name, String surname, Calendar birthDate, int iq) {
+    Human(String name, String surname, String birthDate, int iq) {
         this.name = name;
         this.surname = surname;
-        this.birthDate = birthDate.getTimeInMillis();
         this.iq = iq;
         this.schedule = new HashMap<DayOfWeek, String>();
+        setBirthDate(birthDate);
     }
 
     String getName() {
@@ -28,14 +29,17 @@ public class Human implements HumanCreator {
         return surname;
     }
 
-    Calendar getBirthDate() {
-        Calendar result = Calendar.getInstance();
-        result.setTimeInMillis(birthDate);
-        return result;
+    Date getBirthDate() {
+        return new Date(birthDate);
     }
 
-    public void setBirthDate(Calendar birthDate) {
-        this.birthDate = birthDate.getTimeInMillis();
+    public void setBirthDate(String birthDate) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.birthDate = df.parse(birthDate).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     Family getFamily() {
@@ -51,14 +55,15 @@ public class Human implements HumanCreator {
     }
 
     public Human bornChild(String manName, String womanName) {
-        Calendar now = Calendar.getInstance();
+        Date now = new Date();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         int childIq = (family.getFather().iq + family.getMother().iq) / 2;
 
         Human child;
         if(generateRandomInt(2) == 0) {
-            child = new Man(manName, surname, now, childIq);
+            child = new Man(manName, surname, df.format(now), childIq);
         } else {
-            child = new Woman(womanName, surname, now, childIq);
+            child = new Woman(womanName, surname, df.format(now), childIq);
         }
 
         family.addChild(child);
@@ -103,18 +108,19 @@ public class Human implements HumanCreator {
     }
 
     String describeAge() {
-        Calendar result = Calendar.getInstance();
-        result.setTimeInMillis(result.getTimeInMillis() - birthDate);
-        DateFormat df = new SimpleDateFormat("yyyy' years, 'M' months, 'd' days'");
-        return "Human lives " + df.format(result.getTime());
+        Date result = new Date();
+        result.setTime(-62167399200000L + result.getTime() - birthDate);
+        DateFormat df = new SimpleDateFormat("y' years, 'M' months, 'd' days'");
+        return "Human lives " + df.format(result);
     }
 
     @Override
     public String toString() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         return "{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", year=" + birthDate +
+                ", birthDate=" + df.format(getBirthDate()) +
                 ", iq=" + iq +
                 ", schedule=" + schedule.toString() +
                 '}';

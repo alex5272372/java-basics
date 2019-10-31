@@ -1,9 +1,7 @@
 package hw10;
 
-import java.util.Calendar;
-
 public final class Man extends Human {
-    Man(String name, String surname, Calendar birthDate, int iq) {
+    Man(String name, String surname, String birthDate, int iq) {
         super(name, surname, birthDate, iq);
     }
 

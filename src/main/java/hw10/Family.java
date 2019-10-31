@@ -78,7 +78,7 @@ public class Family {
         long ms = Calendar.getInstance().getTimeInMillis();
         int i = 0;
         while(i < children.size()) {
-            int years = (int) ((ms - children.get(i).getBirthDate().getTimeInMillis()) / 365.25 / 24 / 60 / 60 / 1000);
+            int years = (int) ((ms - children.get(i).getBirthDate().getTime()) / 365.25 / 24 / 60 / 60 / 1000);
             if (years > age) {
                 deleteChild(i);
             } else {
