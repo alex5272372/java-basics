@@ -3,6 +3,7 @@ package hw13;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public abstract class Pet {
@@ -19,6 +20,20 @@ public abstract class Pet {
         this.trickLevel = trickLevel;
         this.species = Species.UNKNOWN;
         this.habits = new HashSet<String>();
+    }
+
+    Pet(JSONObject humanJSON) {
+        this.nickname = (String) humanJSON.get("nickname");
+        this.age = (int) (long) humanJSON.get("age");
+        this.trickLevel = (int) (long) humanJSON.get("trickLevel");
+        this.species = Species.valueOf((String) humanJSON.get("species"));
+        this.habits = new HashSet<String>();
+
+        JSONArray habitsJSON = (JSONArray) humanJSON.get("habits");
+        Iterator<String> iterator = habitsJSON.iterator();
+        while (iterator.hasNext()) {
+            addHabit(iterator.next());
+        }
     }
 
     public Set<String> getHabits() {

@@ -70,9 +70,38 @@ public class CollectionFamilyDao implements FamilyDao {
             Iterator<JSONObject> iterator = familiesJSON.iterator();
             while (iterator.hasNext()) {
                 JSONObject familyJSON = iterator.next();
-                Human mother = new Man((JSONObject) familyJSON.get("mother"));
+                Human mother = new Woman((JSONObject) familyJSON.get("mother"));
                 Human father = new Man((JSONObject) familyJSON.get("father"));
                 Family family = new Family(mother, father);
+
+                JSONArray childrenJSON = (JSONArray) familyJSON.get("children");
+                Iterator<JSONObject> iterator1 = childrenJSON.iterator();
+                while (iterator1.hasNext()) {
+                    JSONObject childJSON = iterator1.next();
+                    if(childJSON.get("gender").equals("woman")) {
+                        family.addChild(new Woman(childJSON));
+                    } else {
+                        family.addChild(new Man(childJSON));
+                    }
+                }
+
+                JSONArray petsJSON = (JSONArray) familyJSON.get("pets");
+                Iterator<JSONObject> iterator2 = petsJSON.iterator();
+                while (iterator2.hasNext()) {
+                    JSONObject petJSON = iterator2.next();
+                    Species species = Species.valueOf((String) petJSON.get("species"));
+
+                    if(species == Species.DOG) {
+                        family.addPet(new Dog(petJSON));
+                    } else if(species == Species.DOMESTIC_CAT) {
+                        family.addPet(new DomesticCat(petJSON));
+                    } else if(species == Species.FISH) {
+                        family.addPet(new Fish(petJSON));
+                    } else if(species == Species.ROBO_CAT) {
+                        family.addPet(new RoboCat(petJSON));
+                    }
+                }
+
                 saveFamily(family);
             }
 
