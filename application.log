@@ -1,0 +1,17 @@
+2019/11/13 15:19:00 [DEBUG] Family:
+    mother: Woman{name='Kate1', surname='Karleone1', birthDate=20/10/1965, iq=65, schedule={}}
+    father: Man{name='John1', surname='Karleone1', birthDate=08/05/1967, iq=67, schedule={}}
+    children:
+        Woman{name='Woman11', surname='Karleone1', birthDate=13/11/2019, iq=66, schedule={}}
+    pets:
+        DOMESTIC_CAT{nickname='tom', age=3, trickLevel=60, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}
+        DOG{nickname='bobik1', age=4, trickLevel=40, habits=[], numberOfLegs=4, isHasFur=true, isCanFly=false}
+2019/11/13 15:19:00 [DEBUG] Family:
+    mother: Woman{name='Kate3', surname='Karleone3', birthDate=20/10/1965, iq=65, schedule={}}
+    father: Man{name='John3', surname='Karleone3', birthDate=08/05/1967, iq=67, schedule={}}
+    children:
+        Woman{name='Woman31', surname='Karleone3', birthDate=13/11/2019, iq=66, schedule={}}
+        Man{name='Man32', surname='Karleone3', birthDate=13/11/2019, iq=66, schedule={}}
+        Man{name='Man33', surname='Karleone3', birthDate=13/11/2019, iq=66, schedule={}}
+    pets:
+        

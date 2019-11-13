@@ -16,14 +16,14 @@ public class FamilyService {
     }
 
     void displayAllFamilies() {
-        getAllFamilies().stream().forEach(family -> System.out.println(family));
+        getAllFamilies().stream().forEach(family -> Logger.info(family.toString()));
     }
 
     List<Family> getFamiliesBiggerThan(int i) {
         List<Family> newFamilies = getAllFamilies().stream()
                 .filter(family -> family.countFamily() > i)
                 .collect(Collectors.toList());
-        newFamilies.stream().forEach(family -> System.out.println(family));
+        newFamilies.stream().forEach(family -> Logger.info(family.toString()));
         return newFamilies;
     }
 
@@ -31,7 +31,7 @@ public class FamilyService {
         List<Family> newFamilies = getAllFamilies().stream()
                 .filter(family -> family.countFamily() < i)
                 .collect(Collectors.toList());
-        newFamilies.stream().forEach(family -> System.out.println(family));
+        newFamilies.stream().forEach(family -> Logger.info(family.toString()));
         return newFamilies;
     }
 

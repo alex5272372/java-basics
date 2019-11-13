@@ -13,11 +13,11 @@ public final class Woman extends Human {
 
     @Override
     void greetPet(String nickname) {
-        System.out.println(String.format("Woman: Hello, %s!", getFamily().getPet(nickname).getNickname()));
+        Logger.info(String.format("Woman: Hello, %s!", getFamily().getPet(nickname).getNickname()));
     }
 
     void makeup() {
-        System.out.println("I'm doing makeup");
+        Logger.info("I'm doing makeup");
     }
 
     @Override

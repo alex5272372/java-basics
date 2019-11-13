@@ -92,13 +92,13 @@ public class Human implements HumanCreator {
 
     void greetPet(String nickname) {
         if (family.getPet(nickname) != null) {
-            System.out.println(String.format("Hello, %s!", nickname));
+            Logger.info(String.format("Hello, %s!", nickname));
         }
     }
 
     void describePet(String nickname) {
         Pet pet = family.getPet(nickname);
-        System.out.println(String.format("I have a %1$s, he is %2$s years old, he %3$s",
+        Logger.info(String.format("I have a %1$s, he is %2$s years old, he %3$s",
                 pet.getSpecies(), pet.getAge(), pet.getTrickLevel() > 50 ? "is very cunning" : "isn't cunning"));
     }
 
@@ -111,10 +111,10 @@ public class Human implements HumanCreator {
         Pet pet = family.getPet(nickname);
         int i = generateRandomInt(100);
         if(isTime || i < pet.getTrickLevel()) {
-            System.out.println(String.format("Hmm... I'll feed you, %s", pet.getNickname()));
+            Logger.info(String.format("Hmm... I'll feed you, %s", pet.getNickname()));
             return true;
         } else {
-            System.out.println(String.format("I think, %s isn't hungry.", pet.getNickname()));
+            Logger.info(String.format("I think, %s isn't hungry.", pet.getNickname()));
             return false;
         }
     }

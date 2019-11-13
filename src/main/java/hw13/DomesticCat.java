@@ -13,10 +13,10 @@ public class DomesticCat extends Pet implements Foulable {
     }
 
     public void foul() {
-        System.out.println("CAT: I need to cover my tracks well...");
+        Logger.info("CAT: I need to cover my tracks well...");
     }
 
     void respond() {
-        System.out.println(String.format("Hi host. I'm CAT %s. I miss you!", getNickname()));
+        Logger.info(String.format("Hi host. I'm CAT %s. I miss you!", getNickname()));
     }
 }

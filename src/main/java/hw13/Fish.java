@@ -13,6 +13,6 @@ public class Fish extends Pet {
     }
 
     void respond() {
-        System.out.println("Bubble Bass");
+        Logger.info("Bubble Bass");
     }
 }

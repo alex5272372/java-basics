@@ -65,7 +65,7 @@ public abstract class Pet {
     }
 
     void eat() {
-        System.out.println("I'm eating!");
+        Logger.info("I'm eating!");
     }
 
     abstract void respond();

@@ -13,11 +13,11 @@ public final class Man extends Human {
 
     @Override
     void greetPet(String nickname) {
-        System.out.println(String.format("Man: Hello, %s!", getFamily().getPet(nickname).getNickname()));
+        Logger.info(String.format("Man: Hello, %s!", getFamily().getPet(nickname).getNickname()));
     }
 
     void repairCar() {
-        System.out.println("I'm doing repair car");
+        Logger.info("I'm doing repair car");
     }
 
     @Override

@@ -13,6 +13,6 @@ public class RoboCat extends Pet {
     }
 
     void respond() {
-        System.out.println(String.format("Hi human. I'm robot %s.", getNickname()));
+        Logger.info(String.format("Hi human. I'm robot %s.", getNickname()));
     }
 }

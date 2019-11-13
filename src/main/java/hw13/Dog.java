@@ -13,10 +13,10 @@ public class Dog extends Pet implements Foulable {
     }
 
     public void foul() {
-        System.out.println("DOG: I need to cover my tracks well...");
+        Logger.info("DOG: I need to cover my tracks well...");
     }
 
     void respond() {
-        System.out.println(String.format("Hi host. I'm DOG %s. I miss you!", getNickname()));
+        Logger.info(String.format("Hi host. I'm DOG %s. I miss you!", getNickname()));
     }
 }
